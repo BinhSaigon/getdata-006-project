@@ -10,8 +10,8 @@ Dataset issues:
 
 Working directory should be: ./data/UCI HAR Dataset
 
-[RUNNING CODE]
-==============
+###[RUNNING CODE]
+
 * If you have already downloaded project's datasets and extracted in [WORKING DIR]/data correctly, running code is quite easy as:
 
 >source("run_analysis.R")
@@ -43,6 +43,6 @@ If you are running Mac OSX you should pass addtional param method = "curl"
 
 >df <- run_analysis(newfileUrl, dalaAlready = FALSE) ##if you want to get back a dataframe referring to tidy datasets.
 
-[BUG]
-=======
+###[BUG]
+
 In case of any unexpected halting when running code please check your current working dir for correct folder structure as described in top section.
