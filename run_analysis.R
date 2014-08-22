@@ -1,4 +1,4 @@
-run_analysis <- function(dataAlready = TRUE){
+run_analysis <- function(fileUrl = NULL, dataAlready = TRUE,...){
 
 ## Validate if data has already been placed in working dir, 
 ## data processing is implemented step-by-step.
@@ -6,11 +6,30 @@ run_analysis <- function(dataAlready = TRUE){
   if (!dataAlready){
     ##code for downloading data from url and extracting to ./data
     ##"data" folder should be created in working dir after this chunk.
+    if (!file.exists("data")){
+      dir.create("data")
+    }
+    
+    ##checking defaul Url, NULL = default Url
+    if (is.null(fileUrl)){
+      fileUrl <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"  
+    }
+    
+    ##download and extract data files into ./data folder
+    print(paste("Please wait for downloading datasets from", fileUrl))
+    filename <- "ss-data.zip"
+    download.file(fileUrl, destfile = "ss-data.zip",...) ##should be passed method="curl" for MAC OSX
+    print("Downloading has been completed.")
+    print(paste("Filename ss-data.zip is created at", date()))
+    print("Unzipping ss-data.zip into ./data folder.")
+    unzip(filename, exdir="./data")
+    print("Unzipping is completed")
   }
   
-  filedir <- paste0("./", "data2")   ##note: data2 for my local dir, it should be "data" on your working dir.
+  filedir <- paste0("./", "data", "/UCI HAR Dataset")
 
 ##STEP 1: processing data variables
+  print("STEP 1 is proceeding...")
 
   label <- read.table(paste0(filedir,"/activity_labels.txt"))
   colnames(label) <- c("id", "activity")
@@ -26,6 +45,7 @@ run_analysis <- function(dataAlready = TRUE){
   feature$featurename <- tolower(gsub("[-]|[,]|[\\()]", "", feature[,"featurename"]))
   
 ##STEP 2: loading and processing "test" datasets
+  print("STEP 2 is proceeding...test datasets...")
   
   ##loading "test" data set
   test.y <- read.table(paste0(filedir, "/test/y_test.txt"))
@@ -52,7 +72,8 @@ run_analysis <- function(dataAlready = TRUE){
   test.x <- cbind(subjectid = test.subj, activity = test.y, test.x)
   
 ##STEP 3: loading and processing "train" datasets
-  
+  print("STEP 3 is proceeding...train datasets...")
+
   ##loading "train" data set
   train.y <- read.table(paste0(filedir, "/train/y_train.txt"))
   colnames(train.y) <- "id"
@@ -77,9 +98,10 @@ run_analysis <- function(dataAlready = TRUE){
   colnames(train.y) <- "activity"
   train.x <- cbind(subjectid = train.subj, activity = train.y, train.x)
 
-  ##FINALIZING TIDY DATASET
+##STEP 4: FINALIZING TIDY DATASET
   ##Writing Samsung data into textfile as independent tidy dataset
   ##New file tidy_ss_[My Name]_[Date].txt will be created in working dir.
+  print("STEP 4 is proceeding...cleaning data...")
 
   library(reshape)
   md.test <- melt(test.x, id=c("subjectid", "activity"))
@@ -91,7 +113,8 @@ run_analysis <- function(dataAlready = TRUE){
   filename <- paste0("tidy_ss_", "PHAMTHAIBINH_", gsub("-", "", Sys.Date()),".txt")
   write.table(rbind(test.x, train.x), file=filename, row.names = FALSE)
   
-  ##Information
+  ##Extra Information for user
+  print("It is DONE.")
   print(paste("Tidy dataset:", filename,"has been created at", date(), "."))
   print(paste("Total cols:", length(test.x), "." ))
   print(paste("Total rows:", length(test.x[,1])+length(train.x[,1]), "." ))
