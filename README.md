@@ -9,7 +9,7 @@ Dataset issues:
                   Datasets should be downloaded and extracted in to ./data from the Url:
                   https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip 
 
-Working directory should be: ./data/UCI HAR Dataset
+**Directory structure should be: [Working Dir]/data/UCI HAR Dataset**
 
 ###[RUNNING CODE]
 
@@ -21,7 +21,7 @@ Working directory should be: ./data/UCI HAR Dataset
 
 >df <- run_analysis() ##if you want to get back a dataframe referring to tidy datasets.
 
-  After running this code you should have a tidy dataset is ss-data-[My Name]-[Date Created].txt in your ./ dir.
+* After running this code you should have a tidy dataset is ss-data-[My Name]-[Date Created].txt in your ./ dir.
 
 * If you have no datasets or not be sure getting datasets correctly, please run code as below:
 
@@ -31,7 +31,7 @@ Working directory should be: ./data/UCI HAR Dataset
 
 >df <- run_analysis(dataAlready = FALSE) ##if you want to get back a dataframe referring to tidy datasets.
 
-  If you are running Mac OSX you should pass addtional param method = "curl"
+* If you are running Mac OSX you should pass addtional param method = "curl"
 >run_analysis(dataAlready = FALSE, method = "curl") ## for Mac OS X
 
 * If default fileUrl is broken or changed, please tell the function what is the new fileUrl for getting data:
