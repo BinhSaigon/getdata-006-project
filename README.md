@@ -1,6 +1,7 @@
 getdata-006-project: run_analysis.R
 ===================
 Before running this code, you should download run_analysis.R into current working directory.
+
 Code description: 
                   run_analysis <- function(fileUrl = NULL, dataAlready = TRUE,...)
 
@@ -20,7 +21,7 @@ Working directory should be: ./data/UCI HAR Dataset
 
 >df <- run_analysis() ##if you want to get back a dataframe referring to tidy datasets.
 
-After running this code you should have a tidy dataset is ss-data-[My Name]-[Date Created].txt in your ./ dir.
+  After running this code you should have a tidy dataset is ss-data-[My Name]-[Date Created].txt in your ./ dir.
 
 * If you have no datasets or not be sure getting datasets correctly, please run code as below:
 
@@ -30,7 +31,7 @@ After running this code you should have a tidy dataset is ss-data-[My Name]-[Dat
 
 >df <- run_analysis(dataAlready = FALSE) ##if you want to get back a dataframe referring to tidy datasets.
 
-If you are running Mac OSX you should pass addtional param method = "curl"
+  If you are running Mac OSX you should pass addtional param method = "curl"
 >run_analysis(dataAlready = FALSE, method = "curl") ## for Mac OS X
 
 * If default fileUrl is broken or changed, please tell the function what is the new fileUrl for getting data:
